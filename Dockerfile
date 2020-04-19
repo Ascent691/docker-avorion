@@ -18,11 +18,13 @@ LABEL org.opencontainers.image.url="https://www.avorion.net/"
 ARG DEBIAN_FRONTEND=noninteractive
 RUN set -x \
     && apt-get update \
+    && apt-get -y install sudo \
     && apt-get install -y --no-install-recommends --no-install-suggests \
         ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 RUN set -x \
     && useradd -m steam \
+    && adduser steam sudo \
     && mkdir -p /home/steam/.avorion/galaxies/avorion_galaxy \
     && chown -R steam:steam /home/steam
 WORKDIR /home/steam/avorion-dedicated
